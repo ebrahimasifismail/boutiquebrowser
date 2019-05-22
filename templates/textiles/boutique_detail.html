@@ -1,4 +1,99 @@
 {% extends 'textiles/dashboard_base.html'  %} {% load static %}
+{% block body %}
+    <div style="padding: 10px">
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:300px">
+      <!-- Header -->
+  <header id="portfolio">
+      <a href="#"><img src="{{boutique.logo.url}}" style="width:65px; float: left; "></a><h1 class="margin-left: 50px;"><b>{{boutique.name}}</b></h1>
+      <div class="w3-section w3-bottombar w3-padding-16">
+          <!-- <h3 class="margin-left: 50px;"><b>{{boutique.caption}}</b></h3> -->
+          <div class="w3-bar-block">
+              <div class="accordion" id="accordionExample">
+                    <h5 class="mb-0">
+                        <div data-toggle="collapse" data-target="#One" aria-expanded="true" aria-controls="collapseOne" class="collapsed">
+                            <h3 class="margin-left: 50px;"><b>{{boutique.caption}}</b></h3> 
+                        </div>
+                      </h5>
+                    </div>
+                
+                    <div id="One" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                     <p>{{boutique.description}}</p>
+                    </div>
+                  
+                </div>
+          <div class="w3-bar-block"></div>
+      
+      </div>
+    </header>
+    <h1>Products</h1>
+    <button class="btn btn-success" style="margin-bottom: 10px;" ><a href="{% url 'textiles:create_product' %}">Add Product</a></button>
+    <!-- First Photo Grid-->
+    <div class="container">
+        
+        <!-- Nav pills -->
+        <ul class="nav nav-pills" role="tablist">
+          {% for category in categories %}
+          <li class="nav-item">
+            <a class="nav-link mr-3" data-toggle="pill" href="#{{category.name}}">{{category.name}}</a>
+          </li>
+          {%endfor%}
+          
+        </ul>
+      
+        <!-- Tab panes -->
+        <div class="tab-content">
+          {% for category in categories %}
+          <div id="{{category.name}}" class="container tab-pane "><br>
+            <h3>{{category.name}}</h3>
+            {% for product in category.product_set.all %}
+            <div class="w3-third w3-container w3-margin-bottom">
+                <img src="{% static 'img/1.png'%}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                <div class="w3-container w3-white">
+                  <p><b><a href="{% url 'textiles:saree_detail' product.id %}">{{product.product_name}}</a></b></p>
+                  <p>{{product.product_detail}}</p>
+                </div>
+            </div>
+            {% endfor %}
+                
+          </div>
+          {% endfor %}
+        
+        </div>
+</div>
+</div> 
+
+  </div></div>
+        
+    {% endblock body %}    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
   <head>
     {% block stylesheet %}
@@ -9,7 +104,7 @@
   <body>
 
     
-    {% block body %}
+    
       <div class="main">
         <div ><img class="logo" src="{{boutique.logo.url}}"></div>
         <div>
@@ -18,11 +113,15 @@
         </div>
         <div>{{boutique.description}}</div>
         <div><h2>Products</h2></div>
+          {% for category in categories %}
+            <h3>{{category.name}}</h3>
+              <p>{% for product in category.product_set.all %}</p>
+                <p>{{product.product_name}}</p>
+                {% endfor %}
 
+          {% endfor %}
       </div>
-      
-    {% endblock body %}
-  
+    
   </body>
 
    

@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.utils.translation import get_language
 from django.views.decorators.csrf import csrf_exempt
-from textiles.models import Product, ProductImage, Order, Boutique
+from textiles.models import Product, ProductImage, Order, Boutique, Category    
 from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from textiles import Checksum
 from textiles.models import Order, PaytmHistory
-from textiles.forms import BoutiqueForm
+from textiles.forms import BoutiqueForm, ProductForm
 
 # Create your views here.
 
@@ -169,7 +169,7 @@ class CreateBoutique(CreateView):
     model = Boutique
     form_class = BoutiqueForm
     template_name = 'textiles/create_boutique.html'
-    success_url = reverse_lazy('textiles:create_boutique')
+    success_url = reverse_lazy('textiles:dashboard')
 
 class Boutique_detail(View):
     template_name = "textiles/boutique_detail.html"
@@ -182,9 +182,18 @@ class Boutique_detail(View):
         return obj
     
     def get(self, request, *args, **kwargs):
-        context = { 'boutique': self.get_object() }
+        categories = Category.objects.all()
+        context = { 'boutique': self.get_object(), 'categories': categories }
+        
         # ordered_by = request.user
         # order_id = paytm.Checksum.__id_generator__()
         # product = self.get_object()
         # Order.objects.create(ordered_by=ordered_by, order_id=order_id, product=product)
         return render(request, self.template_name, context)
+
+
+class CreateProduct(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'textiles/create_product.html'
+    success_url = reverse_lazy('textiles:dashboard')
