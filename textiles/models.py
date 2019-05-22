@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -24,6 +26,7 @@ class Category(models.Model):
 class Boutique(models.Model):
     name = models.CharField(max_length=120)
     logo = models.ImageField()
+    cover_image = models.ImageField(default=os.path.join(settings.STATIC_URL,'img','1.jpg'))
     boutique_id = models.CharField(max_length=120)
     caption = models.CharField(max_length=500)
     description = models.CharField(max_length=2000)

@@ -1,0 +1,29 @@
+{% extends 'textiles/dashboard_base.html'  %} {% load static %}
+<html>
+  <head>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    {% endblock %}
+    
+  </head>
+  <body>
+
+    
+    {% block body %}
+      <div class="main">
+        <div ><img class="logo" src="{{boutique.logo.url}}"></div>
+        <div>
+            <h1>{{boutique.name}}</h1>
+            <h4>{{boutique.caption}}</h4>
+        </div>
+        <div>{{boutique.description}}</div>
+        <div><h2>Products</h2></div>
+
+      </div>
+      
+    {% endblock body %}
+  
+  </body>
+
+   
+</html>

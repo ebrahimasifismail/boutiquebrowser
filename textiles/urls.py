@@ -12,7 +12,8 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('response/', views.response, name='response'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
-    
+    path('create_boutique/', views.CreateBoutique.as_view(), name='create_boutique'),
+    path('boutiques/<int:pk>/', views.Boutique_detail.as_view(), name="boutique_detail")
     
     # path('', views.home, name='home-paytm'),
     # path('payment/', views.payment, name='payment'),

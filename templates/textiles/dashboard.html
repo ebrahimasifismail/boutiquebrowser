@@ -1,16 +1,40 @@
-{% extends 'textiles/base.html' %} {% load static %}
-{% block stylesheet %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-{% endblock %}
-{%block body%}
-<div class="sidenav">
-  <a href="#">Boutiques</a>
-  <a href="#">Insights</a>
-  <a href="#">Settings</a>
-  <a href="#">Reviews</a>
-</div>
+{% extends 'textiles/dashboard_base.html'  %} {% load static %}
+<html>
+  <head>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    {% endblock %}
+    
+  </head>
+  <body>
+
+    
+    {% block body %}
+      <div class="main">
+        <a href="{% url 'textiles:create_boutique' %}">Add Boutique</a>
+        <!-- {{boutiques}} -->
+       <table class="table">
+        {% for boutique in boutiques %}
+        
+        
+            
+            <tbody>
+              <tr>
+                <td>{{boutique.id}}</td>
+                <td><a href="{% url 'textiles:boutique_detail' boutique.pk %}">{{boutique.name}}</a></td>
+                <td>{{boutique.caption}}</td>
+              </tr>
+            </tbody>
+          
+          {% endfor %}
+        </table>
 
 
+      </div>
+      
+    {% endblock body %}
+  
+  </body>
 
    
-{% endblock%}
+</html>

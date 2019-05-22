@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+  <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Colour Plus{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="{% static 'css/app.css' %}"> -->
+        <!-- <link rel="stylesheet" href="{% static 'css/product.css' %}"> -->
+        {% block style %}{% endblock %}
+        
+        {% block stylesheet %}
+        {% endblock %}
+    
+  </head>
+  <body>
+    <div class="sidenav">
+      <h1>Dashboard</h1>
+      <a href="#">Boutiques</a>
+      <a href="#">Insights</a>
+      <a href="#">Settings</a>
+      <a href="#">Reviews</a>
+    </div>
+    {% block body %}
+
+    
+    {% endblock body %}
+    {% block script %}{% endblock %}
+  </body>
+
+   
+</html>

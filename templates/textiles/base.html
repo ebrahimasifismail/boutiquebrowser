@@ -557,7 +557,7 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-    {% block script %}{% endblock %}
+    
     <footer class="container py-5">
             <div class="row">
               <div class="col-12 col-md">
@@ -604,6 +604,7 @@
               </div>
             </div>
           </footer>
+          {% block script %}{% endblock %}
 </body>
 
 </html>

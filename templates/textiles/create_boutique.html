@@ -1,0 +1,27 @@
+{% extends 'textiles/dashboard_base.html'  %} {% load static %}
+<html>
+  <head>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    {% endblock %}
+    
+  </head>
+  <body>
+
+    
+    {% block body %}
+      <div class="main">
+        <a>Add Boutique</a>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    
+    {% endblock body %}
+  
+  </body>
+
+   
+</html>
